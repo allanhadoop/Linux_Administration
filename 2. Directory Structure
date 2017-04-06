@@ -9,13 +9,48 @@ Figure 3.1 at http://www.tldp.org/LDP/sag/html/sag.html#INTRO
 3. /var Filesystem
 4. /home Filesystem
 
-1. root Filesystem - 
+1. root(/) Filesystem - 
 This is specific for each machine (it is generally stored on a local disk, although it could be a ramdisk or network drive as well) and 
 contains the files that are necessary for booting the system up, and to bring it up to such a state that the other filesystems may be 
 mounted. The contents of the root filesystem will therefore be sufficient for the single user state.	It will also contain tools for 
 fixing a broken system, and for recovering lost files from backups.
+It contains - 
+/bin  - 
+/sbin - 
+/etc - 
+/root - 
+/lib - 
+/lib/modules - 
+/dev -
+/tmp - 
+/boot -
+/mnt - 
+/proc, /usr, /var, /home - 
 
-2. /usr Filesystem 
+
+2. /usr Filesystem - 
+The /usr filesystem contains all commands, libraries, manual pages, and other unchanging files needed during normal operation. No files 
+in /usr should be specific for any given machine, nor should they be modified during normal use. This allows the files to be shared over 
+the network, which can be cost-effective since it saves disk space (there can easily be hundreds of megabytes, increasingly multiple 
+gigabytes in /usr). It can make administration easier (only the master /usr needs to be changed when updating an application, not each 
+machine separately) to have /usr network mounted. Even if the filesystem is on a local disk, it could be mounted read-only, to lessen the 
+chance of filesystem corruption during a crash
+
+3. /var Filesystem -
+The /var filesystem contains files that change, such as spool directories (for mail, news, printers, etc), log files, formatted manual 
+pages, and temporary files. Traditionally everything in /var has been somewhere below /usr , but that made it impossible to mount /usr 
+read-only.
+
+4. /home Filesystem -
+The /home filesystem contains the users' home directories, i.e., all the real data on the system. Separating home directories to their 
+own directory tree or filesystem makes backups easier; the other parts often do not have to be backed up, or at least not as often as 
+they seldom change. A big /home might have to be broken across several filesystems, which requires adding an extra naming level below 
+/home, for example /home/students and /home/staff.
+
+
+
+
+
 
 
 
