@@ -15,19 +15,36 @@ contains the files that are necessary for booting the system up, and to bring it
 mounted. The contents of the root filesystem will therefore be sufficient for the single user state.	It will also contain tools for 
 fixing a broken system, and for recovering lost files from backups.
 It contains - 
-/bin  - 
-/sbin - 
-/etc - 
-/root - 
-/lib - 
-/lib/modules - 
-/dev -
-/tmp - 
-/boot -
-/mnt - 
-/proc, /usr, /var, /home - 
 
+/bin  - This folder contains commands needed during bootup that might be used by normal users (probably after bootup).
 
+/sbin - Like /bin, but the commands are not intended for normal users, although they may use them if necessary and allowed. 
+
+/etc - Configuration files specific to the machine.
+
+/root - The home directory for user root. This is usually not accessible to other users on the system
+
+/lib - Shared libraries needed by the programs on the root filesystem
+
+/lib/modules - Loadable kernel modules, especially those that are needed to boot the system when recovering from disasters (e.g., network and filesystem drivers).
+
+/dev - Device files. These are special files that help the user interface with the various devices on the system.
+
+/tmp - Temporary files. As the name suggests, programs running often store temporary files in here 
+
+/mnt - Mount point for temporary mounts by the system administrator. Programs aren't supposed to mount on /mnt automatically. /mnt might 
+be divided into subdirectories (e.g., /mnt/dosa might be the floppy drive using an MS-DOS filesystem, and /mnt/exta might be the same 
+with an ext2 filesystem).
+
+/proc, /usr, /var, /home - Mount points for the other filesystems.
+
+/boot - Files used by the bootstrap loader, e.g., LILO or GRUB. Kernel images are often kept here instead of in the root directory. If 
+there are many kernel images, the directory can easily grow rather big, and it might be better to keep it in a separate filesystem. 
+Another reason would be to make sure the kernel images are within the first 1024 cylinders of an IDE disk. This 1024 cylinder limit is 
+no longer true in most cases. With modern BIOSes and later versions of LILO (the LInux LOader) the 1024 cylinder limit can be passed 
+with logical block addressing (LBA)
+
+------
 2. /usr Filesystem - 
 The /usr filesystem contains all commands, libraries, manual pages, and other unchanging files needed during normal operation. No files 
 in /usr should be specific for any given machine, nor should they be modified during normal use. This allows the files to be shared over 
@@ -47,7 +64,8 @@ own directory tree or filesystem makes backups easier; the other parts often do 
 they seldom change. A big /home might have to be broken across several filesystems, which requires adding an extra naming level below 
 /home, for example /home/students and /home/staff.
 
-
+-------------
+The /etc directory - 
 
 
 
