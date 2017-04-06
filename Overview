@@ -1,0 +1,55 @@
+Source - http://tldp.org/LDP/sag/html/sag.html#INTRO
+
+Linux = kernel + some system programs + application programs for doing work. 
+
+
+Kernel - It keeps track of files on the disk, starts programs and runs them concurrently, assigns memory and other resources to various 
+processes, receives packets from and sends packets to the network, and so on. The kernel does very little by itself, but it provides 
+tools with which all services can be built
+
+The system programs use the tools provided by the kernel to implement the various services required from an operating system. System 
+programs, and all other programs, run `on top of the kernel', in what is called the user mode
+A word processor is an application; mount is a system program.
+
+-- SEE DIAGRAM OF LINUX KERNEL COMPONENTS AT - http://tldp.org/LDP/sag/html/sag.html#INTRO
+
+1. Memory Management - Memory management takes care of assigning memory areas and swap space areas to processes, parts of the kernel, and 
+for the buffer cache
+2. Process Management - Process management creates processes, and implements multitasking by switching the active process on the processor.
+
+3. Hardware device driver - the kernel contains a hardware device driver for each kind of hardware it supports. all disk drivers look 
+alike to the rest of the kernel, i.e., they all have operations like `initialize the drive', `read sector N', and `write sector N'.
+
+4. Virtual filesystem (VFS) layer - It abstracts the filesystem operations away from their implementation. Each filesystem type provides 
+an implementation of each filesystem operation. When some entity tries to use a filesystem, the request goes via the VFS, which routes 
+the request to the proper filesystem driver.
+
+--- Major services in Linux system - 
+1. init 
+2. logins from terminal
+3. Syslog
+4. Periodic command execution: cron and at
+5. Graphical user interface - GUI
+6. Networking
+7. Network logins
+8. Network file systems - NFS
+9. Mail
+10. Printing
+11. The filesystem layout
+
+------------------------
+1. init - init is started as the first process of every UNIX system, as the last thing the kernel does when it boots. When init starts, 
+it continues the boot process by doing various startup chores (checking and mounting filesystems, starting daemons, etc).
+
+
+
+
+
+
+
+
+
+
+
+
+
