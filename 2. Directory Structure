@@ -1,1 +1,22 @@
 Source - http://www.tldp.org/LDP/sag/html/sag.html#INTRO
+
+based on the Filesystem Hierarchy Standard (FHS) , linux directory tree is divided into separate filesystems with different purposes 
+The major parts are the root (/ ), /usr , /var , and /home filesystems
+Figure 3.1 at http://www.tldp.org/LDP/sag/html/sag.html#INTRO
+
+1. root Filesystem 
+2. /usr Filesystem 
+3. /var Filesystem
+4. /home Filesystem
+
+1. root Filesystem - 
+
+
+
+
+
+
+
+
+
+
