@@ -10,9 +10,12 @@ Figure 3.1 at http://www.tldp.org/LDP/sag/html/sag.html#INTRO
 4. /home Filesystem
 
 1. root Filesystem - 
+is specific for each machine (it is generally stored on a local disk, although it could be a ramdisk or network drive as well) and 
+contains the files that are necessary for booting the system up, and to bring it up to such a state that the other filesystems may be 
+mounted. The contents of the root filesystem will therefore be sufficient for the single user state.	It will also contain tools for 
+fixing a broken system, and for recovering lost files from backups.
 
-
-
+2. /usr Filesystem 
 
 
 
