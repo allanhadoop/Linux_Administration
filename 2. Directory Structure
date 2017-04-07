@@ -88,6 +88,53 @@ modem or a network. Do not allow root logins over a network.
 ftpd, is the server process that provides FTP services for a machine, will check that the user's shell is listed in /etc/shells and 
 will not let people log in unless the shell is listed there.
 
+-------------
+* The /dev directory - 
+The /dev directory contains the special device files for all the devices. The device files are created during installation, and later 
+with the /dev/MAKEDEV script. The /dev/MAKEDEV.local is a script written by the system administrator that creates local-only device 
+files or links (i.e. those that are not part of the standard MAKEDEV, such as device files for some non-standard device driver).
+
+/dev/dsp  - Digital Signal Processor
+/dev/fd0  - The first floppy drive
+/dev/fb0  - The first framebuffer device
+...
+..see full list at link above.
+
+-------------
+2. /usr Filesystem - This filesystem is often large, since all programs are installed there
+/usr/X11R6 - The X Window System, all files. To simplify the development and installation of X, the X files have not been integrated into the rest of the system
+/usr/bin - Almost all user commands.
+/usr/sbin - System administration commands that are not needed on the root filesystem
+/usr/share/man, /usr/share/info, /usr/share/doc - Manual pages, GNU Info documents
+/usr/include - Header files for the C programming language
+/usr/lib - Unchanging data files for programs and subsystems, including some site-wide configuration files
+/usr/local - It is reserved solely for the use of the local administrator. locally installed software and other files
+
+-------------
+The /var filesystem - 
+The /var contains data that is changed when the system is running normally. It is specific for each system, i.e., not shared over the 
+network with other computers.
+/var/cache/man
+/var/local
+/var/log
+/var/run
+/var/spool
+/var/tmp
+...
+-------------
+The /proc filesystem
+This is illusionary filesystem. It does not exist on a disk. Instead, the kernel creates it in memory. It stores info on processes
+/proc/devices
+/proc/filesystems
+/proc/devices
+......see more at link above.
+
+
+
+
+
+
+
 
 
 
