@@ -1,0 +1,26 @@
+Source - http://www.tldp.org/LDP/sag/html/sag.html#DEVICE-LIST
+
+1. The MAKEDEV Script
+Most device files will already be created and will be there ready to use after you install your Linux system. If by some chance you need 
+to create one which is not provided then you should first try to use the MAKEDEV script. This script is usually located in /dev/MAKEDEV
+or /sbin/MAKEDEV
+
+  # /dev/MAKEDEV -v ttyS0
+	  create ttyS0   c 4 64 root:dialout 0660
+  
+# This will create the device file /dev/ttyS0 (ttyS0 is a serial port) with major node 4 and minor node 64 as a character device with 
+access permissions 0660 with owner root and group dialout. Here 4 and 64 for numbers understood by Kernel.
+  
+The mknod command - This is used only when if we know minor and  major node.. else we will use MAKEDEV command. Example if we know 4 and 64
+then perform below steps to create device
+
+  # mknod /dev/ttyS0 c 4 64
+	# chown root.dialout /dev/ttyS0
+	# chmod 0644 /dev/ttyS0
+	# ls -l /dev/ttyS0
+		crw-rw----   1 root dialout    4,   64 Oct 23 18:23 /dev/ttyS0
+  
+Other topics are not at updated at site above.. check back soon
+--
+  
+  
