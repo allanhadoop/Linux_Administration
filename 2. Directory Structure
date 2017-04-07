@@ -65,7 +65,28 @@ they seldom change. A big /home might have to be broken across several filesyste
 /home, for example /home/students and /home/staff.
 
 -------------
-The /etc directory - 
+* The /etc directory - 
+/etc/rc or /etc/rc.d or /etc/rc?.d  -- Scripts or directories of scripts to run at startup or when changing the run level.
+/etc/passwd  - The user database, with fields giving the username, real name, home directory, and other information about each user.
+/etc/shadow  - encrypted file the holds user passwords 
+/etc/group   - Similar to /etc/passwd, but describes groups instead of users
+
+/etc/magic   - The configuration file for file. Contains the descriptions of various file formats based on which file guesses the type of the file.
+/etc/inittab - Configuration file for init.
+/etc/issue   - Output by getty before login prompt.Usually contains a short description or welcoming message to the system
+/etc/motd    - The message of the day, automatically output after a successful login
+/etc/mtab    - List of currently mounted filesystems. Initially set up by the bootup scripts, and updated automatically by the mount 
+command. Used when a list of mounted filesystems is needed, e.g., by the df command
+
+/etc/login.defs - Configuration file for the login command
+/etc/profile, /etc/bash.rc, /etc/csh.cshrc  - Files executed at login or startup time by the Bourne, BASH , or C shells. These allow 
+the system administrator to set global defaults for all users.
+/etc/securetty  - Identifies secure terminals, i.e., the terminals from which root is allowed to log in. Typically only the virtual 
+consoles are listed, so that it becomes impossible (or at least harder) to gain superuser privileges by breaking into a system over a 
+modem or a network. Do not allow root logins over a network.
+/etc/shells  - Lists trusted shells. The chsh command allows users to change their login shell only to shells listed in this file. 
+ftpd, is the server process that provides FTP services for a machine, will check that the user's shell is listed in /etc/shells and 
+will not let people log in unless the shell is listed there.
 
 
 
