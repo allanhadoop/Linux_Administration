@@ -1,0 +1,53 @@
+Source - http://www.tldp.org/LDP/sag/html/sag.html#DISK-USAGE
+
+When you install or upgrade your system, you need to do a fair amount of work on your disks. You have to make filesystems on your disks so
+that files can be stored on them and reserve space for the different parts of your system
+
+The basic tasks in administering disks are -
+1. Format your disk
+2. Partition a hard disk
+3. Make a filesystem
+4. Mount different filesystems to form a single tree structure
+
+Linux, recognizes two different kinds of device:-
+1. random-access block devices(disks) 
+2. character devices (tapes or serial lines)
+
+Each devices are represented by device files.so when we write or read form that device file, data goes to that device . example, sending data 
+to printer file 
+> cat filename > /dev/lp1   # contents of the file are printed
+
+> ls -l /dev/ttyS0
+	crw-rw-r--    1 root     dialout    4,  64 Aug 19 18:56 /dev/ttyS0
+
+here first letter c represents character device .For ordinary files, the first character is `-'
+
+## Hard disk ----
+see diagram at  http://www.tldp.org/LDP/sag/html/sag.html#HD-SCHEMATIC to understand how hard disk look like -
+
+A hard disk consists of one or more circular aluminum platters\ , of which either or both surfaces are coated with a magnetic substance 
+used for recording the data.	For each surface, there is a read-write head that examines or alters the recorded data. The platters 
+rotate on a common axis; typical rotation speed is 5400 or 7200 rotations per minute
+
+processor (CPU)  --->disk controller  ---->actual disk
+
+The processor (CPU) and the actual disk communicate through a disk controller . This relieves the rest of the computer from knowing how 
+to use the drive, since the controllers for different types of disks can be made to use the same interface towards the rest of the 
+computer. Therefore, the computer can say just ``hey disk, give me what I want'', instead of a long and complex series of electric 
+signals to move the head to the proper location and waiting for the correct position to come under the head and doing all the other 
+unpleasant stuff necessary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
