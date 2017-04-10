@@ -3,7 +3,7 @@ Source - http://www.tldp.org/LDP/sag/html/sag.html#DISK-USAGE
 When you install or upgrade your system, you need to do a fair amount of work on your disks. You have to make filesystems on your disks so
 that files can be stored on them and reserve space for the different parts of your system
 
-The basic tasks in administering disks are -
+--------------------------The basic tasks in administering disks are -
 1. Format your disk
 2. Partition a hard disk
 3. Make a filesystem
@@ -22,7 +22,7 @@ to printer file
 
 here first letter c represents character device .For ordinary files, the first character is `-'
 
-## Hard disk ----
+----------------------- Hard disk ----
 see diagram at  http://www.tldp.org/LDP/sag/html/sag.html#HD-SCHEMATIC to understand how hard disk look like -
 
 A hard disk consists of one or more circular aluminum platters\ , of which either or both surfaces are coated with a magnetic substance 
@@ -36,6 +36,92 @@ to use the drive, since the controllers for different types of disks can be made
 computer. Therefore, the computer can say just ``hey disk, give me what I want'', instead of a long and complex series of electric 
 signals to move the head to the proper location and waiting for the correct position to come under the head and doing all the other 
 unpleasant stuff necessary.
+
+------------------------Storage Area Networks
+A SAN is a dedicated storage network that provides block level access to LUNs. A LUN, or logical unit number, is a virtual disk provided
+by the SAN.Two networking protocols commonly used in a SAN are fibre channel and iSCSI . A fibre channel network is very fast
+iSCSI is a newer technology that sends SCSI commands over a TCP/IP network
+
+------------------------Network Attached Storage
+A NAS uses your companies existing Ethernet network to allow access to shared disks. This is filesystem level access. The system 
+administrator does not have the ability to partition or format the disks since they are potentially shared by multiple computers. 
+This technology is commonly used to provide multiple workstations access to the same data.
+
+------------------------CD/Floppy/Tapes  - read more at link above
+
+------------------------Formatting
+Formatting is the process of writing marks on the magnetic media that are used to mark tracks and sectors. Before a disk is formatted, 
+its magnetic surface is a complete mess of magnetic signals. When it is formatted, some order is brought into the chaos by essentially 
+drawing lines where the tracks go, and where they are divided into sectors.
+What is important is that a disk cannot be used unless it has been formatted. During formatting one might encounter bad spots on the 
+disk, called bad blocks or bad sectors.
+Floppies are formatted with fdformat .
+
+------------------------Partitions
+A hard disk can be divided into several partitions. Each partition functions as if it were a separate hard disk. The idea is that if 
+you have one hard disk, and want to have, say, two operating systems on it, you can divide the disk into two partitions. Each operating 
+system uses its partition as it wishes and doesn't touch the other ones. This way the two operating systems can co-exist peacefully on 
+the same hard disk. Without partitions one would have to buy a hard disk for each operating system.
+
+
+------------------------The MBR, boot sectors and partition table
+Master boot record (MBR)- The information about how a hard disk has been partitioned is stored in its first sector
+
+$ fdisk -l /dev/hda
+	
+	Disk /dev/hda: 15 heads, 57 sectors, 790 cylinders
+	Units = cylinders of 855 * 512 bytes
+	
+	   Device Boot  Begin   Start     End  Blocks   Id  System
+	/dev/hda1           1       1      24   10231+  82  Linux swap
+	/dev/hda2          25      25      48   10260   83  Linux native
+	/dev/hda3          49      49     408  153900   83  Linux native
+	/dev/hda4         409     409     790  163305    5  Extended
+	/dev/hda5         409     409     744  143611+  83  Linux native
+	/dev/hda6         745     745     790   19636+  83  Linux native
+
+------------------------Extended and logical partitions
+Extended Partition allows partitioning a primary partition into sub-partitions. The primary partition thus subdivided is the extended 
+partition; the sub-partitions are logical partitions. They behave like primary partitions, but are created differently. There is no 
+speed difference between them. By using an extended partition you can now have up to 15 partitions per disk.
+
+see figure 5.2 at http://www.tldp.org/LDP/sag/html/sag.html#DISK-USAGE
+
+
+------------------------Partition types
+The partition tables (the one in the MBR, and the ones for extended partitions) contain one byte per partition that identifies the type 
+of that partition. The purpose is to make it possible to avoid having two operating systems accidentally using the same partition.
+
+here are some of the partition types-
+0  Empty           1c  Hidden Win95 FA 70  DiskSecure Mult bb  Boot Wizard hid
+ 1  FAT12           1e  Hidden Win95 FA 75  PC/IX           be  Solaris boot
+ 2  XENIX root      24  NEC DOS         80  Old Minix       c1  DRDOS/sec (FAT-
+ 3  XENIX usr       39  Plan 9          81  Minix / old Lin c4  DRDOS/sec (FAT-
+ 4  FAT16 <32M      3c  PartitionMagic  82  Linux swap      c6  DRDOS/sec (FAT-
+ 5  Extended        40  Venix 80286     83  Linux           c7  Syrinx
+ 6  FAT16           41  PPC PReP Boot   84  OS/2 hidden C:  da  Non-FS data
+ 7  HPFS/NTFS       42  SFS             85  Linux extended  db  CP/M / CTOS / .
+ 8  AIX             4d  QNX4.x          86  NTFS volume set de  Dell Utility
+ 9  AIX bootable    4e  QNX4.x 2nd part 87  NTFS volume set df  BootIt
+ a  OS/2 Boot Manag 4f  QNX4.x 3rd part 8e  Linux LVM       e1  DOS access
+ b  Win95 FAT32     50  OnTrack DM      93  Amoeba          e3  DOS R/O
+ c  Win95 FAT32 (LB 51  OnTrack DM6 Aux 94  Amoeba BBT      e4  SpeedStor
+ e  Win95 FAT16 (LB 52  CP/M            9f  BSD/OS          eb  BeOS fs
+ f  Win95 Ext'd (LB 53  OnTrack DM6 Aux a0  IBM Thinkpad hi ee  EFI GPT
+10  OPUS            54  OnTrackDM6      a5  FreeBSD         ef  EFI (FAT-12/16/
+11  Hidden FAT12    55  EZ-Drive        a6  OpenBSD         f0  Linux/PA-RISC b
+12  Compaq diagnost 56  Golden Bow      a7  NeXTSTEP        f1  SpeedStor
+14  Hidden FAT16 <3 5c  Priam Edisk     a8  Darwin UFS      f4  SpeedStor
+16  Hidden FAT16    61  SpeedStor       a9  NetBSD          f2  DOS secondary
+17  Hidden HPFS/NTF 63  GNU HURD or Sys ab  Darwin boot     fd  Linux raid auto
+18  AST SmartSleep  64  Novell Netware  b7  BSDI fs         fe  LANstep
+1b  Hidden Win95 FA 65  Novell Netware  b8  BSDI swap       ff  BBT
+
+
+------------------------Partitioning a hard disk - Program fdisk (cfdisk is similar)
+
+
+
 
 
 
