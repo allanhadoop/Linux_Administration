@@ -175,11 +175,16 @@ NTFS (The most advanced Microsoft journaled filesystem providing faster file acc
 proc (make it easy access certain kernel data structures, such as the process list)
 
 ------------Creating a filesystem-------
+Steps to create a ext2 filesystem on a floppy 
+1. floppy formatted (the -n option prevents validation, i.e., bad block checking)
+2. bad blocks were searched with badblocks, with the output redirected to a file, bad-blocks
+3. Finally, the filesystem was created, with the bad block list initialized by whatever badblocks found.
 
-
-
-
-
+$ fdformat -n /dev/fd0H1440
+$ badblocks /dev/fd0H1440 1440 $>$ 
+bad-blocks
+$ mkfs.ext2 -l bad-blocks 
+/dev/fd0H1440
 
 
 
