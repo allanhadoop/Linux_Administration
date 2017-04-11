@@ -119,16 +119,33 @@ here are some of the partition types-
 
 
 ------------------------Partitioning a hard disk - Program fdisk (cfdisk is similar)
+When using IDE disks, the boot partition (the partition with the bootable kernel image files) must be completely within the first 1024 
+cylinders. This is because the disk is used via the BIOS during boot (before the system goes into protected mode), and BIOS can't 
+handle more than 1024 cylinders. It is sometimes possible to use a boot partition that is only partly within the first 1024 cylinders. 
+This works as long as all the files that are read with the BIOS are within the first 1024 cylinders. Since this is difficult to arrange,
+it is a very bad idea to do it; you never know when a kernel update or disk defragmentation will result in an unbootable system. 
+Therefore, make sure your boot partition is completely within the first 1024 cylinders.
 
+Changing a partition's size usually requires first backing up everything you want to save from that partition (preferably the whole disk,
+just in case), deleting the partition, creating new partition, then restoring everything to the new partition. If the partition is 
+growing, you may need to adjust the sizes (and backup and restore) of the adjoining partitions as well.
 
+-------------------------Device files and partitions
+Each partition and extended partition has its own device file. The naming convention for these files is that a partition's number is 
+appended after the name of the whole disk, with the convention that 1-4 are primary partitions (regardless of how many primary 
+partitions there are) and number greater than 5 are logical partitions (regardless of within which primary partition they reside). 
+For example, /dev/hda1 is the first primary partition on the first IDE hard disk, and /dev/sdb7 is the third extended partition on the 
+second SCSI hard disk.
 
+-------------------------Filesystems
+A filesystem is the methods and data structures that an operating system uses to keep track of files on a disk or partition; that is, 
+the way the files are organized on the disk. A few programs (including, reasonably enough, programs that create filesystems) operate 
+directly on the raw sectors of a disk or partition; if there is an existing file system there it will be destroyed or seriously 
+corrupted. Most programs operate on a filesystem, and therefore won't work on a partition that doesn't contain one (or that contains 
+one of the wrong type)
 
-
-
-
-
-
-
+making a filesystem - Before a partition or disk can be used as a filesystem, it needs to be initialized, and the bookkeeping data 
+structures need to be written to the disk. This process is called making a filesystem.
 
 
 
