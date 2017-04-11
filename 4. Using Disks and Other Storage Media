@@ -147,6 +147,40 @@ one of the wrong type)
 making a filesystem - Before a partition or disk can be used as a filesystem, it needs to be initialized, and the bookkeeping data 
 structures need to be written to the disk. This process is called making a filesystem.
 
+Structure may consists of 
+1. superblock (info of the filesystem such as size)
+2. inode (info about the file, example numbers of the data blocks)
+3. data block (store the data in the file)
+4. directory block (consists of filename and inode number) 
+5. indirection block(dynamically allocated blocks )
+
+Various types of filesystem are as follows - 
+ext3 (journaled filesystem, most popular, maintains a log, or journal, of what has happened on a filesystem)
+minix 
+xia
+ext
+ext2 ( Linux filesystems)
+reiserfs
+jfs
+xfs
+msdos (Compatibility with MS-DOS (and OS/2 and Windows NT) FAT filesystems)
+umsdos
+vfat
+iso9660
+nfs (A networked filesystem that allows sharing a filesystem between many computers to allow easy access to the files from all of them)
+smbfs
+hpfs
+sysv
+NTFS (The most advanced Microsoft journaled filesystem providing faster file access and stability over previous Microsoft filesystems)
+proc (make it easy access certain kernel data structures, such as the process list)
+
+------------Creating a filesystem-------
+
+
+
+
+
+
 
 
 
