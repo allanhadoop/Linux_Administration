@@ -186,8 +186,12 @@ bad-blocks
 $ mkfs.ext2 -l bad-blocks 
 /dev/fd0H1440
 
+------------Filesystem block size-----
+The block size specifies size that the filesystem will use to read and write data. Larger block sizes will help improve disk I/O 
+performance when using large files, such as databases. This happens because the disk can read or write data for a longer period of time 
+before having to search for the next block.
 
-
+------------Mounting and unmounting-----
 
 
 
