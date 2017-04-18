@@ -192,6 +192,17 @@ performance when using large files, such as databases. This happens because the 
 before having to search for the next block.
 
 ------------Mounting and unmounting-----
+Before one can use a filesystem, it has to be mounted. The operating system then does various bookkeeping things to make sure that 
+everything works. For example, Figure 5-3 shows three separate filesystems, each with their own root directory. When the last two 
+filesystems are mounted below /home and /usr, respectively, on the first filesystem, we can get a single directory tree
+
+Figure 5.3 at  http://www.tldp.org/LDP/sag/html/sag.html#MEMORY-MANAGEMENT
+
+$ mount /dev/hda2 /home
+$ mount /dev/hda3 /usr
+
+
+
 
 
 
